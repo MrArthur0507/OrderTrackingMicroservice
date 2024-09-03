@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{1E926DB0-698D-4170-ABF1-12D9A19252F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ItemCatalogService", "ItemCatalogService", "{74ED94DD-6D21-4F4F-92FC-33C6813F62DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderTrackingItemCatalogService", "OrderTrackingItemCatalogService\OrderTrackingItemCatalogService.csproj", "{B2677127-ABC5-4161-81FA-B03D92540EEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2677127-ABC5-4161-81FA-B03D92540EEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2677127-ABC5-4161-81FA-B03D92540EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2677127-ABC5-4161-81FA-B03D92540EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2677127-ABC5-4161-81FA-B03D92540EEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{74ED94DD-6D21-4F4F-92FC-33C6813F62DE} = {1E926DB0-698D-4170-ABF1-12D9A19252F6}
+		{B2677127-ABC5-4161-81FA-B03D92540EEE} = {74ED94DD-6D21-4F4F-92FC-33C6813F62DE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C937A6D-8ABF-4E05-A72E-2693FA42D46F}
+	EndGlobalSection
+EndGlobal

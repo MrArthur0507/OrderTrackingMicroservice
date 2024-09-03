@@ -1,0 +1,6 @@
+@OrderTrackingItemCatalogService_HostAddress = http://localhost:5034
+
+GET {{OrderTrackingItemCatalogService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
