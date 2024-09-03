@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ItemCatalogService", "ItemC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderTrackingItemCatalogService", "OrderTrackingItemCatalogService\OrderTrackingItemCatalogService.csproj", "{B2677127-ABC5-4161-81FA-B03D92540EEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderTrackingItemCatalogService.Models", "OrderTrackingItemCatalogService.Models\OrderTrackingItemCatalogService.Models.csproj", "{D02F133A-0EB5-47B5-89B0-FC9FABA25031}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{B2677127-ABC5-4161-81FA-B03D92540EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2677127-ABC5-4161-81FA-B03D92540EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2677127-ABC5-4161-81FA-B03D92540EEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D02F133A-0EB5-47B5-89B0-FC9FABA25031}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D02F133A-0EB5-47B5-89B0-FC9FABA25031}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D02F133A-0EB5-47B5-89B0-FC9FABA25031}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D02F133A-0EB5-47B5-89B0-FC9FABA25031}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -26,6 +32,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{74ED94DD-6D21-4F4F-92FC-33C6813F62DE} = {1E926DB0-698D-4170-ABF1-12D9A19252F6}
 		{B2677127-ABC5-4161-81FA-B03D92540EEE} = {74ED94DD-6D21-4F4F-92FC-33C6813F62DE}
+		{D02F133A-0EB5-47B5-89B0-FC9FABA25031} = {74ED94DD-6D21-4F4F-92FC-33C6813F62DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5C937A6D-8ABF-4E05-A72E-2693FA42D46F}
