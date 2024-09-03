@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OrderTrackingItemCatalogService.Models.ItemCatalogModels;
 
 namespace OrderTrackingItemCatalogService.Data
 {
@@ -6,7 +7,7 @@ namespace OrderTrackingItemCatalogService.Data
     {
         public ItemCatalogContext(DbContextOptions<ItemCatalogContext> options) : base(options) { }
 
-
+        public DbSet<Item> Items { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
