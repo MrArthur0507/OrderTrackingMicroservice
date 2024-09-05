@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using OrderTrackingItemCatalogService.Data;
 using OrderTrackingItemCatalogService.Models.ItemCatalogModels;
+using OrderTrackingItemCatalogService.Models.ItemCatalogModels.DTO;
 using OrderTrackingItemCatalogService.Services.Interfaces;
 
 namespace OrderTrackingItemCatalogService.Services.Implementations
@@ -8,10 +10,11 @@ namespace OrderTrackingItemCatalogService.Services.Implementations
     public class ItemService : IItemService
     {
         private readonly ItemCatalogContext _context;
-
-        public ItemService(ItemCatalogContext context)
+        private readonly IMapper _mapper;
+        public ItemService(ItemCatalogContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<Item>> GetAllItems()
@@ -24,9 +27,10 @@ namespace OrderTrackingItemCatalogService.Services.Implementations
             return await _context.Items.FindAsync(id);
         }
 
-        public async Task<Item> CreateItem(Item item)
+        public async Task<ItemCreateDto> CreateItem(ItemCreateDto item)
         {
-            _context.Items.Add(item);
+            Item itemToSave = _mapper.Map<Item>(item);
+            _context.Items.Add(itemToSave);
             await _context.SaveChangesAsync();
             return item;
         }

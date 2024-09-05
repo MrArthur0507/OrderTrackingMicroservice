@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OrderTrackingItemCatalogService.Models.ItemCatalogModels;
+using OrderTrackingItemCatalogService.Models.ItemCatalogModels.DTO;
 using OrderTrackingItemCatalogService.Services.Interfaces;
 
 namespace OrderTrackingItemCatalogService.Controllers
@@ -17,6 +18,7 @@ namespace OrderTrackingItemCatalogService.Controllers
         }
 
         [HttpGet]
+        [Route("getItems")]
         public async Task<ActionResult<IEnumerable<Item>>> GetItems()
         {
             var items = await _itemService.GetAllItems();
@@ -24,6 +26,7 @@ namespace OrderTrackingItemCatalogService.Controllers
         }
 
         [HttpGet]
+        [Route("getItemById")]
         public async Task<ActionResult<Item>> GetItem(Guid id)
         {
             var item = await _itemService.GetItemById(id);
@@ -34,15 +37,22 @@ namespace OrderTrackingItemCatalogService.Controllers
 
             return Ok(item);
         }
-
+        
         [HttpPost]
-        public async Task<ActionResult<Item>> CreateItem(Item item)
+        [Route("createItem")]
+        
+        public async Task<ActionResult<Item>> CreateItem(ItemCreateDto item)
         {
             var createdItem = await _itemService.CreateItem(item);
-            return CreatedAtAction(nameof(GetItem), new { id = createdItem.Id }, createdItem);
+            if (createdItem != null)
+            {
+                return Ok(createdItem);
+            }
+            return BadRequest();
         }
 
         [HttpPut]
+        [Route("updateItem")]
         public async Task<IActionResult> UpdateItem(Guid id, Item item)
         {
             if (id != item.Id)
@@ -60,6 +70,7 @@ namespace OrderTrackingItemCatalogService.Controllers
         }
 
         [HttpDelete]
+        [Route("deleteItem")]
         public async Task<IActionResult> DeleteItem(Guid id)
         {
             var result = await _itemService.DeleteItem(id);
