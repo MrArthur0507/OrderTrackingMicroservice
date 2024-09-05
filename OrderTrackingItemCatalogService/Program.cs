@@ -1,3 +1,4 @@
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using OrderTrackingItemCatalogService.Data;
 using OrderTrackingItemCatalogService.Services.Implementations;
@@ -17,6 +18,13 @@ builder.Services.AddDbContext<ItemCatalogContext>(options =>
 });
 builder.Services.AddScoped<IItemService, ItemService>();
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.ConfigureEndpoints(context);
+    });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

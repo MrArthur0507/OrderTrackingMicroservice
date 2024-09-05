@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using MassTransit;
+using MassTransit.RabbitMqTransport;
+using MassTransitContracts.ItemCatalogContracts;
 using Microsoft.EntityFrameworkCore;
 using OrderTrackingItemCatalogService.Data;
 using OrderTrackingItemCatalogService.Models.ItemCatalogModels;
@@ -11,10 +14,12 @@ namespace OrderTrackingItemCatalogService.Services.Implementations
     {
         private readonly ItemCatalogContext _context;
         private readonly IMapper _mapper;
-        public ItemService(ItemCatalogContext context, IMapper mapper)
+        private readonly IPublishEndpoint _publisher;
+        public ItemService(ItemCatalogContext context, IMapper mapper, IPublishEndpoint publisher)
         {
             _context = context;
             _mapper = mapper;
+            _publisher = publisher;
         }
 
         public async Task<IEnumerable<Item>> GetAllItems()
@@ -31,7 +36,11 @@ namespace OrderTrackingItemCatalogService.Services.Implementations
         {
             Item itemToSave = _mapper.Map<Item>(item);
             _context.Items.Add(itemToSave);
-            await _context.SaveChangesAsync();
+            int changes = await _context.SaveChangesAsync();
+            if (changes > 0)
+            {
+                await _publisher.Publish(_mapper.Map<ItemCreated>(itemToSave));
+            }
             return item;
         }
 

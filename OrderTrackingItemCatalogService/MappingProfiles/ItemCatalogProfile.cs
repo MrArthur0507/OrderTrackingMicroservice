@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MassTransitContracts.ItemCatalogContracts;
 using OrderTrackingItemCatalogService.Models.ItemCatalogModels;
 using OrderTrackingItemCatalogService.Models.ItemCatalogModels.DTO;
 
@@ -9,6 +10,7 @@ namespace OrderTrackingItemCatalogService.MappingProfiles
         public ItemCatalogProfile()
         {
             CreateMap<ItemCreateDto, Item>();
+            CreateMap<Item, ItemCreated>();
         }
     }
 }
