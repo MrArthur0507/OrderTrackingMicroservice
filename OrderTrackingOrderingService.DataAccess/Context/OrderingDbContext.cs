@@ -17,5 +17,7 @@ namespace OrderTrackingOrderingService.DataAccess.Context
 
         public DbSet<Order> Orders { get; set; }
 
+        public DbSet<Item> Items { get; set; }
+
     }
 }

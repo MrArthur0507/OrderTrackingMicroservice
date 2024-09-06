@@ -37,10 +37,14 @@ namespace OrderTrackingItemCatalogService.Services.Implementations
             Item itemToSave = _mapper.Map<Item>(item);
             _context.Items.Add(itemToSave);
             int changes = await _context.SaveChangesAsync();
-            if (changes > 0)
+
+            if (changes > 0)  
             {
-                await _publisher.Publish(_mapper.Map<ItemCreated>(itemToSave));
+                var itemCreated = _mapper.Map<ItemCreated>(itemToSave);
+                await _publisher.Publish(itemCreated);
+                Console.WriteLine("Published ItemCreated event to RabbitMQ.");
             }
+
             return item;
         }
 

@@ -1,3 +1,4 @@
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using OrderTrackingOrderingService.DataAccess.Context;
 
@@ -13,6 +14,15 @@ builder.Services.AddDbContext<OrderingDbContext>(options =>
 {
     options.UseSqlite(builder.Configuration.GetConnectionString("OrderingConnection"));
 });
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.ConfigureEndpoints(context);
+    }
+    );
+});
+builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
