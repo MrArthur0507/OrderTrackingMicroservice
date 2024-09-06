@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MassTransit;
 using MassTransitContracts.ItemCatalogContracts;
+using OrderTrackingOrdereringService.Models.DbModels;
 using OrderTrackingOrderingService.DataAccess.Context;
 
 namespace OrderTrackingOrderingService.Consumers
@@ -14,9 +15,12 @@ namespace OrderTrackingOrderingService.Consumers
             _context = context;
             _mapper = mapper;
         }
-        public Task Consume(ConsumeContext<ItemCreated> context)
+        public async Task Consume(ConsumeContext<ItemCreated> context)
         {
-            return Task.CompletedTask;
+            Item item = _mapper.Map<Item>(context.Message);
+            _context.Items.Add(item);
+            await _context.SaveChangesAsync();
+            await Console.Out.WriteLineAsync("Item added");
         }
     }
 }

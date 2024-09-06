@@ -1,5 +1,6 @@
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using OrderTrackingOrderingService.Consumers;
 using OrderTrackingOrderingService.DataAccess.Context;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,8 @@ builder.Services.AddDbContext<OrderingDbContext>(options =>
 });
 builder.Services.AddMassTransit(x =>
 {
+    x.AddConsumer<ItemCreatedConsumer>();
+
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.ConfigureEndpoints(context);
