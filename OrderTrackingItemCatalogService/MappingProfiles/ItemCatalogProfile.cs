@@ -11,6 +11,7 @@ namespace OrderTrackingItemCatalogService.MappingProfiles
         {
             CreateMap<ItemCreateDto, Item>();
             CreateMap<Item, ItemCreated>();
+            CreateMap<Item, ItemUpdated>();
         }
     }
 }

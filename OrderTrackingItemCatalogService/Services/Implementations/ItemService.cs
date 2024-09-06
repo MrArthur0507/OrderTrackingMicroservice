@@ -62,8 +62,13 @@ namespace OrderTrackingItemCatalogService.Services.Implementations
             existingItem.StockQuantity = item.StockQuantity;
 
             _context.Entry(existingItem).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
+            int changes = await _context.SaveChangesAsync();
+            if (changes > 0)
+            {
+                var itemUpdated = _mapper.Map<ItemUpdated>(existingItem);
+                await _publisher.Publish(itemUpdated);
+                Console.WriteLine("Published ItemUpdated event to RabbitMQ.");
+            }
             return existingItem;
         }
 
@@ -76,7 +81,13 @@ namespace OrderTrackingItemCatalogService.Services.Implementations
             }
 
             _context.Items.Remove(item);
-            await _context.SaveChangesAsync();
+            int changes = await _context.SaveChangesAsync();
+            if (changes > 0)
+            {
+                ItemDeleted itemDeleted = new ItemDeleted(id);
+                await _publisher.Publish(itemDeleted);
+                Console.WriteLine("Published ItemDeleted event to RabbitMQ");
+            }
             return true;
         }
     }

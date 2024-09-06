@@ -9,5 +9,15 @@ namespace MassTransitContracts.ItemCatalogContracts
     public class ItemDeleted
     {
         public Guid Id { get; set; }
+
+        public ItemDeleted()
+        {
+            
+        }
+
+        public ItemDeleted(Guid id)
+        {
+            Id = id;
+        }
     }
 }
