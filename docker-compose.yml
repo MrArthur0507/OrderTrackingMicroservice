@@ -1,19 +1,26 @@
 
+
 services:
-  order-tracking-item-catalog-service:
+  # RabbitMQ service
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"  # RabbitMQ default port for messaging
+      - "15672:15672" # RabbitMQ management console
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  # .NET Core application service
+  ordertracking:
     build:
       context: .
       dockerfile: OrderTrackingItemCatalogService/Dockerfile
+    container_name: ordertrackingitemcatalogservice
     ports:
-      - "5001:80" 
+      - "5001:8080"  # Map container port 5001 to host port 5001
+    depends_on:
+      - rabbitmq  # Ensure RabbitMQ starts before this service
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__CatalogConnection=Data Source=Catalog.db
-    volumes:
-      - ./Catalog.db:/app/Catalog.db 
-
-  rabbitmq:
-    image: rabbitmq:3-management
-    ports:
-      - "5672:5672"   
-      - "15672:15672" 
+      RabbitMQ__Host: rabbitmq  # Set RabbitMQ host to the service name

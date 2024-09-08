@@ -18,6 +18,8 @@ builder.Services.AddDbContext<OrderingDbContext>(options =>
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<ItemCreatedConsumer>();
+    x.AddConsumer<ItemUpdatedConsumer>();
+    x.AddConsumer<ItemDeletedConsumer>();
 
     x.UsingRabbitMq((context, cfg) =>
     {
