@@ -15,7 +15,6 @@ COPY OrderTrackingItemCatalogService/ OrderTrackingItemCatalogService/
 COPY OrderTrackingItemCatalogService.Models/ OrderTrackingItemCatalogService.Models/
 COPY MassTransitContracts/ MassTransitContracts/
 
-
 RUN dotnet publish OrderTrackingItemCatalogService/OrderTrackingItemCatalogService.csproj -c Release -o /app/out
 
 
@@ -26,6 +25,7 @@ WORKDIR /app
 COPY --from=build /app/out .
 
 
-EXPOSE 8080
+EXPOSE 5001
+ENV ASPNETCORE_URLS=http://*:5001
 
 ENTRYPOINT ["dotnet", "OrderTrackingItemCatalogService.dll"]

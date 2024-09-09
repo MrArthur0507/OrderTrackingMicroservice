@@ -5,8 +5,8 @@ using OrderTrackingItemCatalogService.Services.Implementations;
 using OrderTrackingItemCatalogService.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -34,12 +34,10 @@ builder.Services.AddMassTransit(x =>
 
 builder.Services.AddMassTransitHostedService();
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+using (var scope = app.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var db = scope.ServiceProvider.GetRequiredService<ItemCatalogContext>();
+    db.Database.Migrate(); 
 }
 app.UseSwagger();
 app.UseSwaggerUI();
