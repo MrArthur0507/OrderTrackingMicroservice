@@ -24,4 +24,19 @@ services:
       - rabbitmq  
     environment:
       RabbitMQ__Host: rabbitmq 
-  
+
+
+  postgres:
+    image: postgres:15-alpine  
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres     
+      POSTGRES_PASSWORD: password 
+      POSTGRES_DB: identity        
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:  
