@@ -9,10 +9,12 @@ namespace OrderTrackingOrdereringService.Models.DbModels
 {
     public class Order : Entity
     {
-        public Guid ItemId { get; set; }
+        public DateTime OrderDate { get; set; }
+        public decimal TotalAmount { get; set; }  
+        public string CustomerName { get; set; }
+        public string ShippingAddress { get; set; }
 
-        public int Quantity { get; set; }
-
-        public DateTime Date { get; set; }
+        
+        public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();  
     }
 }

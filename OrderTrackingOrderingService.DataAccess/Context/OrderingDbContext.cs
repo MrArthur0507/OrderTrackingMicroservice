@@ -19,5 +19,28 @@ namespace OrderTrackingOrderingService.DataAccess.Context
 
         public DbSet<Item> Items { get; set; }
 
+        public DbSet<OrderItem> OrderItems { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            
+            modelBuilder.Entity<Order>()
+                .HasMany(o => o.OrderItems)
+                .WithOne(oi => oi.Order)
+                .HasForeignKey(oi => oi.OrderId);
+
+            
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(oi => oi.Item)
+                .WithMany(i => i.OrderItems)
+                .HasForeignKey(oi => oi.ItemId);
+
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(o => o.Order)
+                .WithMany(i => i.OrderItems)
+                .HasForeignKey(oi => oi.OrderId);
+        }
+
+
     }
 }

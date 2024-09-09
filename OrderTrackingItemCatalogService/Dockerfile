@@ -27,5 +27,6 @@ COPY --from=build /app/out .
 
 EXPOSE 5001
 ENV ASPNETCORE_URLS=http://*:5001
+ENV ASPNETCORE_ENVIRONMENT=Development
 
 ENTRYPOINT ["dotnet", "OrderTrackingItemCatalogService.dll"]
