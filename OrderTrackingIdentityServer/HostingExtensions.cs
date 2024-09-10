@@ -4,6 +4,7 @@ using OderTrackingIdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using OrderTrackingIdentityServer.Services;
 
 namespace OderTrackingIdentityServer;
 
@@ -34,7 +35,8 @@ internal static class HostingExtensions
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryClients(Config.Clients)
-            .AddAspNetIdentity<ApplicationUser>();
+            .AddAspNetIdentity<ApplicationUser>()
+            .AddProfileService<CustomProfileService>();
         builder.Services.ConfigureApplicationCookie(options =>
         {
             options.Cookie.SameSite = SameSiteMode.Lax;

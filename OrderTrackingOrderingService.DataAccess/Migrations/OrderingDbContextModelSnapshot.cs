@@ -39,7 +39,7 @@ namespace OrderTrackingOrderingService.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Items");
+                    b.ToTable("Items", (string)null);
                 });
 
             modelBuilder.Entity("OrderTrackingOrdereringService.Models.DbModels.Order", b =>
@@ -64,7 +64,7 @@ namespace OrderTrackingOrderingService.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("OrderTrackingOrdereringService.Models.DbModels.OrderItem", b =>
@@ -91,7 +91,7 @@ namespace OrderTrackingOrderingService.DataAccess.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("OrderTrackingOrdereringService.Models.DbModels.OrderItem", b =>

@@ -13,7 +13,6 @@ namespace OrderTrackingOrdereringService.Models.DbModels
         public decimal TotalAmount { get; set; }  
         public string CustomerName { get; set; }
         public string ShippingAddress { get; set; }
-
         
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();  
     }
