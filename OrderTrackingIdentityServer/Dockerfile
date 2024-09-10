@@ -3,15 +3,11 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 
-COPY OrderTrackingIdentityServer/OrderTrackingIdentityServer.csproj OrderTrackingIdentityServer/
-
-
-
+COPY OrderTrackingIdentityServer/OrderTrackingIdentityServer.csproj ./OrderTrackingIdentityServer/
 RUN dotnet restore OrderTrackingIdentityServer/OrderTrackingIdentityServer.csproj
 
 
-COPY OrderTrackingIdentityServer/ OrderTrackingIdentityServer/
-
+COPY OrderTrackingIdentityServer/ ./OrderTrackingIdentityServer/
 
 RUN dotnet publish OrderTrackingIdentityServer/OrderTrackingIdentityServer.csproj -c Release -o /app/out
 
@@ -24,6 +20,9 @@ COPY --from=build /app/out .
 
 
 EXPOSE 5000
+
+
 ENV ASPNETCORE_URLS=http://*:5000
+ENV ASPNETCORE_ENVIRONMENT=Development
 
 ENTRYPOINT ["dotnet", "OrderTrackingIdentityServer.dll"]

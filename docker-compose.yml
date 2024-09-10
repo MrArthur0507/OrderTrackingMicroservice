@@ -25,6 +25,21 @@ services:
     environment:
       RabbitMQ__Host: rabbitmq 
 
+  identityserver:
+    build:
+      context: .
+      dockerfile: OrderTrackingIdentityServer/Dockerfile
+    container_name: ordertrackingidentityserver
+    ports:
+      - "5000:5000"
+    environment:
+      POSTGRES_HOST: postgres 
+      POSTGRES_DB: identity
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    depends_on:
+      - postgres  
+    
 
   postgres:
     image: postgres:15-alpine  
@@ -37,6 +52,20 @@ services:
       POSTGRES_DB: identity        
     volumes:
       - pgdata:/var/lib/postgresql/data
+  
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    hostname: sqlserver
+    ports:
+      - "1433:1433"  
+    environment:
+      SA_PASSWORD: "YourStrong!Passw0rd"  
+      ACCEPT_EULA: "Y"  
+    volumes:
+      - sqlserverdata:/var/opt/mssql  
+
 
 volumes:
-  pgdata:  
+  pgdata:
+  sqlserverdata:  
