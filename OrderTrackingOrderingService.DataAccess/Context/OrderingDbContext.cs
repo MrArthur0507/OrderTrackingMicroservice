@@ -21,6 +21,9 @@ namespace OrderTrackingOrderingService.DataAccess.Context
 
         public DbSet<OrderItem> OrderItems { get; set; }
 
+        public DbSet<Cart> Carts { get; set; }
+
+        public DbSet<CartItem> CartItems { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             
@@ -39,6 +42,17 @@ namespace OrderTrackingOrderingService.DataAccess.Context
                 .HasOne(o => o.Order)
                 .WithMany(i => i.OrderItems)
                 .HasForeignKey(oi => oi.OrderId);
+
+            modelBuilder.Entity<CartItem>()
+                .HasOne(c => c.Cart)
+                .WithMany(i => i.Items)
+                .HasForeignKey(oi => oi.CartId);
+
+            modelBuilder.Entity<CartItem>()
+                .HasOne(c => c.Item)
+                .WithMany(o => o.CartItems)
+                .HasForeignKey(oi => oi.ItemId);
+
         }
 
 

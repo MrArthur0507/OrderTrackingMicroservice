@@ -7,18 +7,15 @@ using System.Threading.Tasks;
 
 namespace OrderTrackingOrdereringService.Models.DbModels
 {
-    public class OrderItem : Entity
+    public class CartItem : Entity
     {
-        public int Quantity { get; set; }
-        public decimal UnitPrice { get; set; }  
-
-        
-        public Guid OrderId { get; set; }
-        public Order Order { get; set; }  
+        public Guid CartId { get; set; }
+        public Cart Cart { get; set; }
 
         public Guid ItemId { get; set; }
-        public Item Item { get; set; }  
 
+        public Item Item { get; set; }
+
+        public int Quantity { get; set; }
     }
-
 }

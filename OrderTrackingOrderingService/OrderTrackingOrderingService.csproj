@@ -26,10 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Contracts\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MassTransitContracts\MassTransitContracts.csproj" />
     <ProjectReference Include="..\OrderTrackingOrderingService.DataAccess\OrderTrackingOrderingService.DataAccess.csproj" />
   </ItemGroup>
