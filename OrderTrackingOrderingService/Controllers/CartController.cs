@@ -18,6 +18,20 @@ namespace OrderTrackingOrderingService.Controllers
             _cartService = cartService;
         }
 
+        [HttpGet]
+        [Route("getCart")]
+        public async Task<IActionResult> GetCart()
+        {
+            var username = GetUsername();
+            var cart = await _cartService.GetCartWithItems(username);
+
+            if (cart == null)
+            {
+                return NotFound("Cart not found.");
+            }
+
+            return Ok(cart);
+        }
 
 
         [HttpPost]
@@ -35,7 +49,7 @@ namespace OrderTrackingOrderingService.Controllers
         public async Task<IActionResult> AddItemToCart([FromBody] CartItemAddDto cartItemAddDto)
         {
             var username = GetUsername();
-
+            
             var success = await _cartService.AddItemToCart(username, cartItemAddDto);
             if (success)
             {

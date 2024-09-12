@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using OrderTrackingOrderingService.Consumers;
 using OrderTrackingOrderingService.DataAccess.Context;
+using OrderTrackingOrderingService.Services.Contracts;
+using OrderTrackingOrderingService.Services.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,11 @@ builder.Services.AddMassTransit(x =>
 
     x.UsingRabbitMq((context, cfg) =>
     {
+        cfg.Host("rabbitmq", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
         cfg.ConfigureEndpoints(context);
     }
     );
@@ -38,8 +45,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.TokenValidationParameters.ValidateAudience = false;
         options.TokenValidationParameters.NameClaimType = "username";
     });
+builder.Services.AddScoped<ICartService, CartService>();
 var app = builder.Build();
-
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<OrderingDbContext>();
+    db.Database.Migrate();
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

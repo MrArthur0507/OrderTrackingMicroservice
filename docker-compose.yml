@@ -1,7 +1,4 @@
-
-
 services:
-
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: rabbitmq
@@ -12,18 +9,33 @@ services:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
 
-
   ordertracking:
     build:
       context: .
       dockerfile: OrderTrackingItemCatalogService/Dockerfile
     container_name: ordertrackingitemcatalogservice
     ports:
-      - "5001:5001"  
+      - "5001:5001"
     depends_on:
-      - rabbitmq  
+      - rabbitmq
     environment:
-      RabbitMQ__Host: rabbitmq 
+      RabbitMQ__Host: rabbitmq
+    volumes:
+      - ordertracking_db:/app/Data 
+
+  ordertrackingorderingservice:
+    build:
+      context: .
+      dockerfile: OrderTrackingOrderingService/Dockerfile
+    container_name: ordertrackingorderingservice
+    ports:
+      - "5002:5002"
+    depends_on:
+      - rabbitmq
+    environment:
+      RabbitMQ__Host: rabbitmq
+    volumes:
+      - ordertrackingordering_db:/app/Data 
 
   identityserver:
     build:
@@ -33,39 +45,26 @@ services:
     ports:
       - "5000:5000"
     environment:
-      POSTGRES_HOST: postgres 
+      POSTGRES_HOST: postgres
       POSTGRES_DB: identity
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     depends_on:
-      - postgres  
-    
+      - postgres
 
   postgres:
-    image: postgres:15-alpine  
+    image: postgres:15-alpine
     container_name: postgres
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: postgres     
-      POSTGRES_PASSWORD: password 
-      POSTGRES_DB: identity        
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: identity
     volumes:
       - pgdata:/var/lib/postgresql/data
-  
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sqlserver
-    hostname: sqlserver
-    ports:
-      - "1433:1433"  
-    environment:
-      SA_PASSWORD: "YourStrong!Passw0rd"  
-      ACCEPT_EULA: "Y"  
-    volumes:
-      - sqlserverdata:/var/opt/mssql  
-
 
 volumes:
   pgdata:
-  sqlserverdata:  
+  ordertracking_db:   
+  ordertrackingordering_db:  

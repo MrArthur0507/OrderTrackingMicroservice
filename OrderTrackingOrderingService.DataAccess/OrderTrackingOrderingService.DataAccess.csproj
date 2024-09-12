@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OrderTrackingOrdereringService.Models\OrderTrackingOrdereringService.Models.csproj" />
+    <ProjectReference Include="..\OrderTrackingOrderingService.Models\OrderTrackingOrderingService.Models.csproj" />
   </ItemGroup>
 
 </Project>

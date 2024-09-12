@@ -2,6 +2,7 @@
 using OrderTrackingOrdereringService.Models.DbModels;
 using OrderTrackingOrdereringService.Models.DTOs;
 using OrderTrackingOrderingService.DataAccess.Context;
+using OrderTrackingOrderingService.Models.DTOs;
 using OrderTrackingOrderingService.Services.Contracts;
 
 namespace OrderTrackingOrderingService.Services.Implementation
@@ -14,6 +15,37 @@ namespace OrderTrackingOrderingService.Services.Implementation
         {
             _dbContext = orderingDbContext;
         }
+
+
+        public async Task<CartDto> GetCartWithItems(string username)
+        {
+            var cart = await _dbContext.Carts
+                .Include(c => c.Items)
+                .ThenInclude(ci => ci.Item)  
+                .FirstOrDefaultAsync(c => c.CustomerUsername == username);
+
+            if (cart == null)
+            {
+                return null; 
+            }
+
+            CartDto cartDto = new CartDto();
+            cartDto.CustomerUsername = username;
+            List<CartItemDto> items = new List<CartItemDto>();
+            foreach (var item in cart.Items)
+            {
+                CartItemDto cartItemDto = new CartItemDto();
+                cartItemDto.ItemId = item.Id;
+                cartItemDto.Quantity = item.Quantity;
+                items.Add(cartItemDto);
+            }
+            cartDto.Items = items;
+
+            return cartDto;
+        }
+
+
+
 
         private async Task<Cart> GetOrCreateCart(string username)
         {
@@ -63,7 +95,10 @@ namespace OrderTrackingOrderingService.Services.Implementation
                 ItemId = itemExist.Id,
                 Quantity = cartItemAddDto.Quantity
             };
-
+            if (existingCart.Items == null)
+            {
+                existingCart.Items = new List<CartItem>();
+            }
             existingCart.Items.Add(cartItem);
             await _dbContext.SaveChangesAsync(); 
 

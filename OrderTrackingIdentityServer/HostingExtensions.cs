@@ -24,6 +24,7 @@ internal static class HostingExtensions
         builder.Services
             .AddIdentityServer(options =>
             {
+                options.IssuerUri = "http://identityserver:5000";
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;

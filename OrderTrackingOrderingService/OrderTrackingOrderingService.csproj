@@ -28,6 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MassTransitContracts\MassTransitContracts.csproj" />
     <ProjectReference Include="..\OrderTrackingOrderingService.DataAccess\OrderTrackingOrderingService.DataAccess.csproj" />
+    <ProjectReference Include="..\OrderTrackingOrderingService.Models\OrderTrackingOrderingService.Models.csproj" />
   </ItemGroup>
 
 </Project>
