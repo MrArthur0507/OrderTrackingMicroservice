@@ -30,6 +30,16 @@ public static class Config
                 RedirectUris = {"https://www.getpostman.com/oauth2/callback"},
                 ClientSecrets = new[] {new Secret("testSecret".Sha256())},
                 AllowedGrantTypes = {GrantType.ResourceOwnerPassword}
+            },
+            new Client
+            {
+                ClientId = "angular",
+                ClientName = "Angular",
+                AllowedScopes = {"openid", "profile"},
+                RedirectUris = {"https://localhost:4200/signin-oidc"},
+                ClientSecrets = new[] {new Secret("testSecret".Sha256())},
+                AllowedGrantTypes = {GrantType.AuthorizationCode},
+                
             }
         };
 }
