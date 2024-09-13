@@ -20,16 +20,36 @@ namespace OrderTrackingOrderingService.Services.Implementation
 
             List<OrderDto> orderDtos = new List<OrderDto>();
 
+            
+
+
             foreach (var order in orders)
             {
                 OrderDto orderDto = new OrderDto();
+                orderDto.TotalAmount = order.TotalAmount;
                 orderDto.CustomerName = order.CustomerName;
-                orderDto.OrderItems = order.OrderItems;
+                orderDto.OrderItems = convertToDto(order.OrderItems.ToList());
                 orderDto.OrderDate = order.OrderDate;
                 orderDto.ShippingAddress = order.ShippingAddress;
                 orderDtos.Add(orderDto);
             }
             return orderDtos;
+        }
+
+
+        private List<OrderItemDto> convertToDto(List<OrderItem> items)
+        {
+            List<OrderItemDto> orderItemDtos = new List<OrderItemDto>();
+
+            foreach (var item in items)
+            {
+                OrderItemDto orderItemDto = new OrderItemDto();
+
+                orderItemDto.ItemId = item.ItemId;
+                orderItemDto.Quantity = item.Quantity;
+                orderItemDtos.Add(orderItemDto);
+            }
+            return orderItemDtos;
         }
         
         public async Task<bool> SubmitOrder(string username)
@@ -51,8 +71,8 @@ namespace OrderTrackingOrderingService.Services.Implementation
             order.OrderItems = new List<OrderItem>();
 
 
-            decimal totalPrice = cart.Items.Sum(ci => ci.Item.Price);  
-
+            decimal totalPrice = cart.Items.Sum(ci => ci.Item.Price * ci.Quantity);  
+            order.TotalAmount = totalPrice;
 
             foreach (var cartItem in cart.Items)
             {

@@ -14,6 +14,6 @@ namespace OrderTrackingOrderingService.Models.DTOs
         public string CustomerName { get; set; }
         public string ShippingAddress { get; set; }
 
-        public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        public ICollection<OrderItemDto> OrderItems { get; set; } = new List<OrderItemDto>();
     }
 }
