@@ -27,6 +27,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderTrackingIdentityServer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderTrackingOrderingService.Models", "OrderTrackingOrderingService.Models\OrderTrackingOrderingService.Models.csproj", "{9AC5F572-CA07-4D29-A2FC-BC2465594968}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{2D083088-93FF-4849-A17D-9C39A57EBD6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderTrackingGateway", "OrderTrackingGateway\OrderTrackingGateway.csproj", "{682C00FF-AE91-4913-A50B-8F87683F197A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +65,10 @@ Global
 		{9AC5F572-CA07-4D29-A2FC-BC2465594968}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AC5F572-CA07-4D29-A2FC-BC2465594968}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AC5F572-CA07-4D29-A2FC-BC2465594968}.Release|Any CPU.Build.0 = Release|Any CPU
+		{682C00FF-AE91-4913-A50B-8F87683F197A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{682C00FF-AE91-4913-A50B-8F87683F197A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{682C00FF-AE91-4913-A50B-8F87683F197A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{682C00FF-AE91-4913-A50B-8F87683F197A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +84,8 @@ Global
 		{6B726665-E061-4713-AEDB-6E32605B7D60} = {1E926DB0-698D-4170-ABF1-12D9A19252F6}
 		{DAEAD26E-026F-4AD5-8E0D-903DBC904E5B} = {6B726665-E061-4713-AEDB-6E32605B7D60}
 		{9AC5F572-CA07-4D29-A2FC-BC2465594968} = {3A60FFB8-177E-4166-9BF1-FF8892D8FCDD}
+		{2D083088-93FF-4849-A17D-9C39A57EBD6B} = {1E926DB0-698D-4170-ABF1-12D9A19252F6}
+		{682C00FF-AE91-4913-A50B-8F87683F197A} = {2D083088-93FF-4849-A17D-9C39A57EBD6B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5C937A6D-8ABF-4E05-A72E-2693FA42D46F}
