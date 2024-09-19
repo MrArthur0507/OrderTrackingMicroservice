@@ -10,8 +10,11 @@ namespace OrderTrackingOrderingService.Services.Implementation
     {
 
         private readonly OrderingDbContext _dbContext;
-        public OrderService(OrderingDbContext orderingDbContext) {
+        private readonly IOrderVerificationService _orderVerificationService;
+        public OrderService(OrderingDbContext orderingDbContext, IOrderVerificationService orderVerificationService = null)
+        {
             _dbContext = orderingDbContext;
+            _orderVerificationService = orderVerificationService;
         }
 
         public async Task<List<OrderDto>> GetOrders(string username)
@@ -21,8 +24,6 @@ namespace OrderTrackingOrderingService.Services.Implementation
             List<OrderDto> orderDtos = new List<OrderDto>();
 
             
-
-
             foreach (var order in orders)
             {
                 OrderDto orderDto = new OrderDto();
@@ -70,7 +71,6 @@ namespace OrderTrackingOrderingService.Services.Implementation
             order.ShippingAddress = "testOnly";  
             order.OrderItems = new List<OrderItem>();
 
-
             decimal totalPrice = cart.Items.Sum(ci => ci.Item.Price * ci.Quantity);  
             order.TotalAmount = totalPrice;
 
@@ -89,7 +89,7 @@ namespace OrderTrackingOrderingService.Services.Implementation
 
             _dbContext.Orders.Add(order);
             await _dbContext.SaveChangesAsync();
-
+            await _orderVerificationService.SendOrderForVerification(order);
             return true;
 
         }

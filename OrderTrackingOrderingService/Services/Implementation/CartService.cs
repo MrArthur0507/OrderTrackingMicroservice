@@ -45,8 +45,6 @@ namespace OrderTrackingOrderingService.Services.Implementation
         }
 
 
-
-
         private async Task<Cart> GetOrCreateCart(string username)
         {
             var existingCart = await _dbContext.Carts.FirstOrDefaultAsync(c => c.CustomerUsername == username);

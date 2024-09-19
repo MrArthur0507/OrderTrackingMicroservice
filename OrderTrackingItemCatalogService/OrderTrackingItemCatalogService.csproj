@@ -29,8 +29,4 @@
     <ProjectReference Include="..\OrderTrackingItemCatalogService.Models\OrderTrackingItemCatalogService.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Consumers\" />
-  </ItemGroup>
-
 </Project>
