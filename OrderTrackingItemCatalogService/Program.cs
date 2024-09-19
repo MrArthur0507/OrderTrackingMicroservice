@@ -1,5 +1,6 @@
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using OrderTrackingItemCatalogService.Consumers;
 using OrderTrackingItemCatalogService.Data;
 using OrderTrackingItemCatalogService.Services.Implementations;
 using OrderTrackingItemCatalogService.Services.Interfaces;
@@ -20,8 +21,12 @@ builder.Services.AddScoped<IItemService, ItemService>();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddMassTransit(x =>
 {
+    x.AddConsumer<OrderCreatedConsumer>();
+
     x.UsingRabbitMq((context, cfg) =>
     {
+        
+
         cfg.Host("rabbitmq", h =>
         {
             h.Username("guest");
