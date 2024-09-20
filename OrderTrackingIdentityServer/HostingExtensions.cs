@@ -49,7 +49,12 @@ internal static class HostingExtensions
     }
     
     public static WebApplication ConfigurePipeline(this WebApplication app)
-    { 
+    {
+        using (var scope = app.Services.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            db.Database.Migrate();
+        }
         app.UseSerilogRequestLogging();
     
         if (app.Environment.IsDevelopment())

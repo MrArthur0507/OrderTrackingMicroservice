@@ -1,4 +1,6 @@
-﻿using OderTrackingIdentityServer;
+﻿using Microsoft.EntityFrameworkCore;
+using OderTrackingIdentityServer;
+using OderTrackingIdentityServer.Data;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -20,7 +22,6 @@ try
         .ConfigureServices()
         .ConfigurePipeline();
 
-    
     if (args.Contains("/seed"))
     {
         Log.Information("Seeding database...");
