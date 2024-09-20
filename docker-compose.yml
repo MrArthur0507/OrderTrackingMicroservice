@@ -37,6 +37,15 @@ services:
     volumes:
       - ordertrackingordering_db:/app/Data 
 
+  ordertrackinggateway:
+    build:
+      context: .
+      dockerfile: OrderTrackingGateway/Dockerfile
+    container_name: ordertrackinggateway
+    ports:
+      - "7000:7000"
+
+
   identityserver:
     build:
       context: .
