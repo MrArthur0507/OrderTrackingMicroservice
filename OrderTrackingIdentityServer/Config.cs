@@ -44,6 +44,7 @@ public static class Config
                 RequireClientSecret = false,
                 AllowedCorsOrigins = { "http://localhost:4200" },
                 AllowAccessTokensViaBrowser = true,
+                
             }
         };
 }

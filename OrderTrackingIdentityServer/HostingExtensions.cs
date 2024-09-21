@@ -24,12 +24,11 @@ internal static class HostingExtensions
         builder.Services
             .AddIdentityServer(options =>
             {
-                options.IssuerUri = "http://localhost:5000";
+                options.IssuerUri = "http://bpenchev.info:5000";
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
-
                 // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
                 options.EmitStaticAudienceClaim = true;
             })
