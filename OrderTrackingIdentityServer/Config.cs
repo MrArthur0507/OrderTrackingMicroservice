@@ -37,12 +37,12 @@ public static class Config
                 ClientId = "angular",
                 ClientName = "Angular",
                 AllowedScopes = {"openid", "profile"},
-                RedirectUris = {"http://localhost:4200"},
-                PostLogoutRedirectUris = { "http://localhost:4200" },
+                RedirectUris = {"http://bpenchev.info"},
+                PostLogoutRedirectUris = { "http://bpenchev.info" },
                 AllowedGrantTypes = {GrantType.AuthorizationCode},
                 RequirePkce = true,
                 RequireClientSecret = false,
-                AllowedCorsOrigins = { "http://localhost:4200" },
+                AllowedCorsOrigins = { "http://bpenchev.info" },
                 AllowAccessTokensViaBrowser = true,
                 
             }
