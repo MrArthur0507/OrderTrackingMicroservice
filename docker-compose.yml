@@ -64,11 +64,11 @@ services:
       POSTGRES_PASSWORD: password
     depends_on:
       - postgres
-
   angularapp:
     image: ordertracking-angular-app
+    container_name: angularapp
     ports:
-      - "4200:4200" 
+      - "4200:4200"
   postgres:
     image: postgres:15-alpine
     container_name: postgres

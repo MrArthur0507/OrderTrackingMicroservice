@@ -12,6 +12,8 @@ internal static class HostingExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
+        var config = builder.Configuration.GetSection("IdentityServer");
+
         builder.Services.AddRazorPages();
 
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -30,7 +32,7 @@ internal static class HostingExtensions
         builder.Services
             .AddIdentityServer(options =>
             {
-                options.IssuerUri = "http://bpenchev.info:5000";
+                options.IssuerUri = "http://localhost:5000";
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;

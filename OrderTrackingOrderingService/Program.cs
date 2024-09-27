@@ -2,6 +2,7 @@ using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.IdentityModel.Tokens;
 using OrderTrackingOrderingService.Consumers;
 using OrderTrackingOrderingService.DataAccess.Context;
 using OrderTrackingOrderingService.Services.Contracts;
@@ -40,10 +41,15 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = builder.Configuration["IdentityServerUrl"];
-        options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters.ValidateAudience = false;
-        options.TokenValidationParameters.NameClaimType = "username";
+        options.Authority = "http://identityserver:5000";  
+        options.RequireHttpsMetadata = false;        
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,                     
+            ValidateLifetime = true,
+            ValidateAudience = false,
+            NameClaimType = "username",
+    };
     });
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IOrderService, OrderService>();

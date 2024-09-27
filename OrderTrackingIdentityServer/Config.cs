@@ -45,6 +45,20 @@ public static class Config
                 AllowedCorsOrigins = { "http://bpenchev.info" },
                 AllowAccessTokensViaBrowser = true,
                 
+            },
+            new Client
+            {
+                ClientId = "angularLocal",
+                ClientName = "AngularLocal",
+                AllowedScopes = {"openid", "profile"},
+                RedirectUris = {"http://localhost:4200"},
+                PostLogoutRedirectUris = { "http://localhost:4200" },
+                AllowedGrantTypes = {GrantType.AuthorizationCode},
+                RequirePkce = true,
+                RequireClientSecret = false,
+                AllowedCorsOrigins = { "http://localhost:4200" },
+                AllowAccessTokensViaBrowser = true,
+
             }
         };
 }
